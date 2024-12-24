@@ -9,7 +9,7 @@
     <div class="content">
         <h1 class="display-4 mb-4">Selamat Datang di Desa Pelita</h1>
         <p class="lead mb-4">Desa yang penuh keindahan, budaya, dan kuliner khas.</p>
-        <a href="#about" class="btn btn-primary btn-lg mt-4">Jelajahi Lebih Lanjut</a>
+        <a href="#about" class="btn btn-primary btn-lg mt-4 custom-btn">Jelajahi Lebih Lanjut</a>
     </div>
 </div>
 
@@ -28,7 +28,7 @@
                 </p>
             </div>
             <div class="col-md-6">
-                <img src="{{ asset('images/desa.jpg') }}" alt="Tentang Desa Pelita" class="img-fluid rounded shadow-sm">
+                <img src="{{ asset('assets/desa-pelita.png') }}" alt="Tentang Desa Pelita" class="img-fluid rounded shadow-sm" style="max-width: 100%; height: auto;">
             </div>
         </div>
     </div>
@@ -42,7 +42,11 @@
             @foreach ($wisatas->take(3) as $wisata)
             <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="card h-100 shadow-sm">
-                    <img src="{{ asset('storage/' . $wisata->gambar) }}" class="card-img-top" alt="{{ $wisata->nama }}">
+                    @if ($wisata->gambar)
+                        <img src="{{ asset('storage/' . $wisata->gambar) }}" class="card-img-top" alt="{{ $wisata->nama }}" style="max-width: 100%; height: 200px; object-fit: cover;">
+                    @else
+                        <img src="{{ asset('images/default.jpg') }}" class="card-img-top" alt="Default Image" style="max-width: 100%; height: 200px; object-fit: cover;">
+                    @endif
                     <div class="card-body">
                         <h5 class="card-title text-primary">{{ $wisata->nama }}</h5>
                         <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($wisata->deskripsi, 100) }}</p>
@@ -65,7 +69,7 @@
             @foreach ($kuliners->take(3) as $kuliner)
             <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="card h-100 shadow-sm">
-                    <img src="{{ asset('storage/' . $kuliner->gambar) }}" class="card-img-top" alt="{{ $kuliner->nama }}">
+                    <img src="{{ asset('storage/' . $kuliner->gambar) }}" class="card-img-top" alt="{{ $kuliner->nama }}" style="max-width: 100%; height: 200px; object-fit: cover;">
                     <div class="card-body">
                         <h5 class="card-title text-primary">{{ $kuliner->nama }}</h5>
                         <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($kuliner->deskripsi, 100) }}</p>
@@ -159,7 +163,7 @@
         background: url('{{ asset('assets/background.png') }}') no-repeat center center;
         background-size: cover;
         background-attachment: fixed;
-        width: 99,9vw;
+        width: 100vw;
         margin-left: calc(50% - 50vw);
         box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
         display: flex;
@@ -205,5 +209,38 @@
         background-color: #007bff;
         color: #fff;
     }
+
+    .custom-btn {
+        position: relative;
+        overflow: hidden;
+        transition: color 0.4s;
+    }
+
+    .custom-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300%;
+        height: 300%;
+        background: rgba(255, 255, 255, 0.15);
+        transition: all 0.75s;
+        border-radius: 50%;
+        z-index: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    .custom-btn:hover::before {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    .custom-btn:hover {
+        color: #fff;
+    }
+
+    .custom-btn span {
+        position: relative;
+        z-index: 2;
+    }
 </style>
-@endsection
+@endsection 

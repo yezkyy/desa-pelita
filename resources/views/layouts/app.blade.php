@@ -40,11 +40,21 @@
         }
         .navbar-nav {
             margin-left: auto;
-            margin-right: auto;
         }
         .nav-item {
             display: flex;
             align-items: center;
+        }
+        .btn-login {
+            background-color: #007bff;
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 10px 20px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-login:hover {
+            background-color: #0056b3;
+            color: #ffffff;
         }
     </style>
 </head>
@@ -70,6 +80,7 @@
                         <a class="nav-link" href="/kuliner">Kuliner</a>
                     </li>
                 </ul>
+                <a class="nav-link btn btn-login ms-auto" href="{{ route('login') }}">Login</a>
             </div>
         </div>
     </nav>
