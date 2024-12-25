@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Wisata;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Log;
 
 class WisataController extends Controller
 {
@@ -34,8 +32,7 @@ class WisataController extends Controller
         $wisata->deskripsi = $request->deskripsi;
 
         if ($request->hasFile('gambar')) {
-            $filename = $request->file('gambar')->getClientOriginalName();
-            $path = $request->file('gambar')->storeAs('images', $filename, 'public');
+            $path = $request->file('gambar')->store('images', 'public');
             $wisata->gambar = $path;
         }
 
@@ -44,12 +41,13 @@ class WisataController extends Controller
         return redirect()->route('admin.wisata.index')->with('success', 'Wisata created successfully.');
     }
 
-    public function edit(Wisata $wisata)
+    public function edit($id)
     {
+        $wisata = Wisata::findOrFail($id);
         return view('admin.wisata.edit', compact('wisata'));
     }
 
-    public function update(Request $request, Wisata $wisata)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama' => 'required',
@@ -57,17 +55,12 @@ class WisataController extends Controller
             'gambar' => 'nullable|image',
         ]);
 
+        $wisata = Wisata::findOrFail($id);
         $wisata->nama = $request->nama;
         $wisata->deskripsi = $request->deskripsi;
 
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
-            if ($wisata->gambar) {
-                Storage::disk('public')->delete($wisata->gambar);
-            }
-
-            $filename = $request->file('gambar')->getClientOriginalName();
-            $path = $request->file('gambar')->storeAs('images', $filename, 'public');
+            $path = $request->file('gambar')->store('images', 'public');
             $wisata->gambar = $path;
         }
 
@@ -78,23 +71,8 @@ class WisataController extends Controller
 
     public function destroy($id)
     {
-        $wisata = Wisata::find($id);
-
-        if (!$wisata) {
-            Log::error('Wisata not found with ID: ' . $id);
-            return redirect()->route('admin.wisata.index')->with('error', 'Wisata not found.');
-        }
-
-        Log::info('Destroy method called for Wisata ID: ' . $wisata->id);
-
-        // Hapus gambar jika ada
-        if ($wisata->gambar) {
-            Storage::disk('public')->delete($wisata->gambar);
-        }
-
-        $deleted = $wisata->delete();
-        Log::info('Wisata deleted successfully: ' . ($deleted ? 'true' : 'false'));
-
+        $wisata = Wisata::findOrFail($id);
+        $wisata->delete();
         return redirect()->route('admin.wisata.index')->with('success', 'Wisata deleted successfully.');
     }
 }

@@ -14,7 +14,7 @@
 </div>
 
 <!-- Section About -->
-<section id="about" class="py-5" data-aos="fade-up">
+<section id="about" class="py-5" data-aos="fade-right">
     <div class="container">
         <h2 class="text-center mb-4">Tentang Desa Pelita</h2>
         <div class="row align-items-center">
@@ -35,12 +35,12 @@
 </section>
 
 <!-- Section Wisata -->
-<section id="wisata" class="py-5 bg-light" data-aos="fade-up">
+<section id="wisata" class="py-5 bg-light" data-aos="fade-left">
     <div class="container">
         <h2 class="text-center mb-4">Wisata Populer</h2>
         <div class="row">
             @foreach ($wisatas->take(3) as $wisata)
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="card h-100 shadow-sm">
                     @if ($wisata->gambar)
                         <img src="{{ asset('storage/' . $wisata->gambar) }}" class="card-img-top" alt="{{ $wisata->nama }}" style="max-width: 100%; height: 200px; object-fit: cover;">
@@ -67,7 +67,7 @@
         <h2 class="text-center mb-4">Kuliner Lezat</h2>
         <div class="row">
             @foreach ($kuliners->take(3) as $kuliner)
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+            <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="card h-100 shadow-sm">
                     <img src="{{ asset('storage/' . $kuliner->gambar) }}" class="card-img-top" alt="{{ $kuliner->nama }}" style="max-width: 100%; height: 200px; object-fit: cover;">
                     <div class="card-body">
@@ -85,11 +85,11 @@
 </section>
 
 <!-- Section Testimonials -->
-<section id="testimonials" class="py-5 bg-light" data-aos="fade-up">
+<section id="testimonials" class="py-5 bg-light" data-aos="fade-down">
     <div class="container">
         <h2 class="text-center mb-4">Testimoni Pengunjung</h2>
         <div class="row">
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="100">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <p class="card-text text-muted">"Desa Pelita adalah tempat yang luar biasa! Keindahan alamnya memukau dan budayanya sangat menarik."</p>
@@ -97,7 +97,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="200">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <p class="card-text text-muted">"Kuliner di Desa Pelita sangat lezat dan beragam. Saya sangat menikmati setiap hidangan yang saya coba."</p>
@@ -105,7 +105,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="col-md-4 mb-4" data-aos="flip-left" data-aos-delay="300">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body">
                         <p class="card-text text-muted">"Pengalaman yang tak terlupakan! Desa Pelita benar-benar menawarkan sesuatu yang unik dan berbeda."</p>
@@ -122,7 +122,7 @@
     <div class="container">
         <h2 class="text-center mb-4">Kontak Kami</h2>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" data-aos="fade-right">
                 <form>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama</label>
@@ -139,7 +139,7 @@
                     <button type="submit" class="btn btn-primary">Kirim</button>
                 </form>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6" data-aos="fade-left">
                 <h5 class="text-primary">Alamat</h5>
                 <p class="text-muted">Jl. Raya Desa Pelita No. 123, Kabupaten Pelita, Indonesia</p>
                 <h5 class="text-primary">Telepon</h5>
@@ -156,6 +156,7 @@
 
     body {
         font-family: 'Poppins', sans-serif;
+        overflow-x: hidden; /* Prevent horizontal scroll */
     }
 
     .parallax-section {
@@ -163,13 +164,13 @@
         background: url('{{ asset('assets/background.png') }}') no-repeat center center;
         background-size: cover;
         background-attachment: fixed;
-        width: 100vw;
-        margin-left: calc(50% - 50vw);
+        width: 100%;
         box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
         display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
+        overflow: hidden;
     }
 
     .parallax-section .content {
@@ -185,11 +186,6 @@
 
     .parallax-section p {
         font-size: 1.25rem;
-    }
-
-    .parallax-section .btn {
-        font-size: 1.25rem;
-        padding: 0.75rem 1.5rem;
     }
 
     .card {
@@ -243,4 +239,4 @@
         z-index: 2;
     }
 </style>
-@endsection 
+@endsection

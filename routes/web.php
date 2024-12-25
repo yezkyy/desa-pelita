@@ -20,7 +20,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
 
-// Rute CRUD untuk Wisata
+// Rute CRUD untuk Wisata dan Kuliner
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('wisata', AdminWisataController::class, ['as' => 'admin']);
     Route::resource('kuliner', AdminKulinerController::class, ['as' => 'admin']);

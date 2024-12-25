@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Kuliner;
 
 class KulinerController extends Controller
 {
@@ -12,8 +13,8 @@ class KulinerController extends Controller
      */
     public function index()
     {
-        // Logika untuk menampilkan daftar kuliner
-        return view('admin.kuliner.index');
+        $kuliners = Kuliner::all();
+        return view('admin.kuliner.index', compact('kuliners'));
     }
 
     /**
@@ -21,7 +22,6 @@ class KulinerController extends Controller
      */
     public function create()
     {
-        // Logika untuk menampilkan form tambah kuliner
         return view('admin.kuliner.create');
     }
 
@@ -30,7 +30,24 @@ class KulinerController extends Controller
      */
     public function store(Request $request)
     {
-        // Logika untuk menyimpan kuliner baru
+        $request->validate([
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'nullable|image',
+        ]);
+
+        $kuliner = new Kuliner();
+        $kuliner->nama = $request->nama;
+        $kuliner->deskripsi = $request->deskripsi;
+
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('images', 'public');
+            $kuliner->gambar = $path;
+        }
+
+        $kuliner->save();
+
+        return redirect()->route('admin.kuliner.index')->with('success', 'Kuliner created successfully.');
     }
 
     /**
@@ -44,25 +61,41 @@ class KulinerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Kuliner $kuliner)
     {
-        // Logika untuk menampilkan form edit kuliner
-        return view('admin.kuliner.edit');
+        return view('admin.kuliner.edit', compact('kuliner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Kuliner $kuliner)
     {
-        // Logika untuk memperbarui kuliner
+        $request->validate([
+            'nama' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'nullable|image',
+        ]);
+
+        $kuliner->nama = $request->nama;
+        $kuliner->deskripsi = $request->deskripsi;
+
+        if ($request->hasFile('gambar')) {
+            $path = $request->file('gambar')->store('images', 'public');
+            $kuliner->gambar = $path;
+        }
+
+        $kuliner->save();
+
+        return redirect()->route('admin.kuliner.index')->with('success', 'Kuliner updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Kuliner $kuliner)
     {
-        // Logika untuk menghapus kuliner
+        $kuliner->delete();
+        return redirect()->route('admin.kuliner.index')->with('success', 'Kuliner deleted successfully.');
     }
 }

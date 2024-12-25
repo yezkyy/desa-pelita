@@ -12,6 +12,7 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f8f9fa;
         }
         .navbar {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -45,16 +46,27 @@
             display: flex;
             align-items: center;
         }
-        .btn-login {
+        .nav-link-admin {
+            color: #ff0000; /* Warna teks berbeda untuk Admin */
+        }
+        .btn-login, .btn-logout {
             background-color: #007bff;
             color: #ffffff;
             border-radius: 20px;
             padding: 10px 20px;
             transition: background-color 0.3s ease;
         }
-        .btn-login:hover {
+        .btn-login:hover, .btn-logout:hover {
             background-color: #0056b3;
             color: #ffffff;
+        }
+        .footer {
+            background-color: #343a40;
+            color: #ffffff;
+            padding: 20px 0;
+        }
+        .footer p {
+            margin: 0;
         }
     </style>
 </head>
@@ -79,18 +91,32 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/kuliner">Kuliner</a>
                     </li>
+                    @if (Auth::check())
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-admin" href="{{ route('admin.index') }}">Admin</a>
+                        </li>
+                    @endif
                 </ul>
-                <a class="nav-link btn btn-login ms-auto" href="{{ route('login') }}">Login</a>
+                @if (Auth::check())
+                    <form action="{{ route('logout') }}" method="POST" class="ms-auto">
+                        @csrf
+                        <button type="submit" class="btn btn-logout ms-3">Logout</button>
+                    </form>
+                @else
+                    <a class="nav-link btn btn-login ms-auto" href="{{ route('login') }}">Login</a>
+                @endif
             </div>
         </div>
     </nav>
 
-    <main style="padding-top: 50px;">
+    <main style="padding-top: 70px;">
         @yield('content')
     </main>
 
-    <footer class="text-center py-4 bg-light mt-5">
-        <p class="text-muted mb-0">© 2024 Desa Pelita. All rights reserved.</p>
+    <footer class="footer text-center py-4 mt-5">
+        <div class="container">
+            <p class="text-muted mb-0">© 2024 Desa Pelita. All rights reserved.</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
