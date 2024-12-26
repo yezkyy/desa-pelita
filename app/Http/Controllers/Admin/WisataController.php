@@ -22,23 +22,24 @@ class WisataController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'deskripsi' => 'required',
-            'gambar' => 'nullable|image',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'jam_operasional' => 'nullable|string|max:255',
+            'harga_tiket' => 'nullable|string|max:255',
+            'fasilitas' => 'nullable|string',
+            'lokasi' => 'nullable|string',
         ]);
 
-        $wisata = new Wisata();
-        $wisata->nama = $request->nama;
-        $wisata->deskripsi = $request->deskripsi;
+        $data = $request->only(['nama', 'deskripsi', 'jam_operasional', 'harga_tiket', 'fasilitas', 'lokasi']);
 
         if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('images', 'public');
-            $wisata->gambar = $path;
+            $data['gambar'] = $request->file('gambar')->store('wisata', 'public');
         }
 
-        $wisata->save();
+        Wisata::create($data);
 
-        return redirect()->route('admin.wisata.index')->with('success', 'Wisata created successfully.');
+        return redirect()->route('admin.wisata.index')->with('success', 'Wisata berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -50,23 +51,25 @@ class WisataController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'deskripsi' => 'required',
-            'gambar' => 'nullable|image',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'jam_operasional' => 'nullable|string|max:255',
+            'harga_tiket' => 'nullable|string|max:255',
+            'fasilitas' => 'nullable|string',
+            'lokasi' => 'nullable|string',
         ]);
 
         $wisata = Wisata::findOrFail($id);
-        $wisata->nama = $request->nama;
-        $wisata->deskripsi = $request->deskripsi;
+        $data = $request->only(['nama', 'deskripsi', 'jam_operasional', 'harga_tiket', 'fasilitas', 'lokasi']);
 
         if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('images', 'public');
-            $wisata->gambar = $path;
+            $data['gambar'] = $request->file('gambar')->store('wisata', 'public');
         }
 
-        $wisata->save();
+        $wisata->update($data);
 
-        return redirect()->route('admin.wisata.index')->with('success', 'Wisata updated successfully.');
+        return redirect()->route('admin.wisata.index')->with('success', 'Wisata berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -75,4 +78,4 @@ class WisataController extends Controller
         $wisata->delete();
         return redirect()->route('admin.wisata.index')->with('success', 'Wisata deleted successfully.');
     }
-}
+}           

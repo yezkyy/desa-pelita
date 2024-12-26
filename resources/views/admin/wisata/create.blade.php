@@ -30,6 +30,23 @@
                             <label for="gambar" class="form-label">Gambar</label>
                             <input type="file" class="form-control" id="gambar" name="gambar">
                         </div>
+                        <div class="mb-3">
+                            <label for="jam_operasional" class="form-label">Jam Operasional</label>
+                            <input type="text" class="form-control" id="jam_operasional" name="jam_operasional">
+                        </div>
+                        <div class="mb-3">
+                            <label for="harga_tiket" class="form-label">Harga Tiket</label>
+                            <input type="text" class="form-control" id="harga_tiket" name="harga_tiket">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fasilitas" class="form-label">Fasilitas</label>
+                            <textarea class="form-control" id="fasilitas" name="fasilitas" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lokasi" class="form-label">Lokasi (Embed Google Maps)</label>
+                            <textarea class="form-control" id="lokasi" name="lokasi" rows="3"></textarea>
+                            <small class="form-text text-muted">Masukkan embed code dari Google Maps.</small>
+                        </div>
                         <button type="submit" class="btn btn-success w-100">Add Wisata</button>
                     </form>
                     <a href="{{ route('admin.wisata.index') }}" class="btn btn-secondary w-100 mt-3">Back</a>

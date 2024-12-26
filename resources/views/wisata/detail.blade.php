@@ -20,7 +20,9 @@
             <h5 class="text-primary">Deskripsi</h5>
             <p class="text-muted">{{ $wisata->deskripsi }}</p>
             <h5 class="text-primary">Lokasi</h5>
-            <p class="text-muted">{{ $wisata->lokasi }}</p>
+            <div class="embed-responsive embed-responsive-16by9">
+                {!! $wisata->lokasi !!}
+            </div>
             <h5 class="text-primary">Harga Tiket</h5>
             <p class="text-muted">{{ $wisata->harga_tiket }}</p>
             <h5 class="text-primary">Jam Operasional</h5>
@@ -37,8 +39,35 @@
                 ({{ round($averageRating, 1) }} dari 5)
             </p>
             <h5 class="text-primary">Fasilitas</h5>
-            <p class="text-muted">{{ $wisata->fasilitas }}</p>
+            <ul class="text-muted">
+                @foreach (explode("\n", $wisata->fasilitas) as $fasilitas)
+                    <li>{{ $fasilitas }}</li>
+                @endforeach
+            </ul>
         </div>
+    </div>
+
+    <!-- Daftar Testimoni -->
+    <div class="mt-5">
+        <h3 class="text-center mb-4">Testimoni Pengunjung</h3>
+        @foreach ($testimonis as $testimoni)
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ $testimoni->nama }}</h5>
+                <p class="card-text">
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($i < $testimoni->rating)
+                            <span class="fa fa-star checked"></span>
+                        @else
+                            <span class="fa fa-star"></span>
+                        @endif
+                    @endfor
+                    ({{ $testimoni->rating }} dari 5)
+                </p>
+                <p class="card-text">{{ $testimoni->pesan }}</p>
+            </div>
+        </div>
+        @endforeach
     </div>
 
     <!-- Form Testimoni -->
@@ -67,29 +96,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Kirim Testimoni</button>
         </form>
-    </div>
-
-    <!-- Daftar Testimoni -->
-    <div class="mt-5">
-        <h3 class="text-center mb-4">Testimoni Pengunjung</h3>
-        @foreach ($testimonis as $testimoni)
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ $testimoni->nama }}</h5>
-                <p class="card-text">
-                    @for ($i = 0; $i < 5; $i++)
-                        @if ($i < $testimoni->rating)
-                            <span class="fa fa-star checked"></span>
-                        @else
-                            <span class="fa fa-star"></span>
-                        @endif
-                    @endfor
-                    ({{ $testimoni->rating }} dari 5)
-                </p>
-                <p class="card-text">{{ $testimoni->pesan }}</p>
-            </div>
-        </div>
-        @endforeach
     </div>
 
     <div class="mt-4">
