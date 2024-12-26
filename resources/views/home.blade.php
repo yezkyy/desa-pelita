@@ -5,11 +5,11 @@
 @section('content')
 
 <!-- Section Home -->
-<div class="parallax-section text-center text-white d-flex align-items-center justify-content-center" data-aos="fade-up">
+<div class="parallax-section text-center text-white d-flex align-items-center justify-content-center">
     <div class="content">
-        <h1 class="display-4 mb-4">Selamat Datang di Desa Pelita</h1>
-        <p class="lead mb-4">Desa yang penuh keindahan, budaya, dan kuliner khas.</p>
-        <a href="#about" class="btn btn-primary btn-lg mt-4 custom-btn">Jelajahi Lebih Lanjut</a>
+        <h1 class="display-4 mb-4" data-aos="fade-up">Selamat Datang di Desa Pelita</h1>
+        <p class="lead mb-4" data-aos="fade-up">Desa yang penuh keindahan, budaya, dan kuliner khas.</p>
+        <a href="#about" class="btn btn-primary btn-lg mt-4 custom-btn" data-aos="fade-down">Jelajahi Lebih Lanjut</a>
     </div>
 </div>
 
@@ -156,7 +156,7 @@
 
     body {
         font-family: 'Poppins', sans-serif;
-        overflow-x: hidden; /* Prevent horizontal scroll */
+        overflow-x: hidden;
     }
 
     .parallax-section {
@@ -165,7 +165,6 @@
         background-size: cover;
         background-attachment: fixed;
         width: 100%;
-        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -239,4 +238,13 @@
         z-index: 2;
     }
 </style>
+
+<script>
+    // JavaScript untuk efek parallax
+    document.addEventListener('scroll', function() {
+        const parallax = document.querySelector('.parallax-section');
+        let scrollPosition = window.pageYOffset;
+        parallax.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+    });
+</script>
 @endsection

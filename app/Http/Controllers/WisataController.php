@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Wisata;
+use App\Models\Testimoni;
 
 class WisataController extends Controller
 {
@@ -14,7 +15,7 @@ class WisataController extends Controller
 
         $wisatas = Wisata::query();
 
-        if ($search) {
+        if ($search)    {
             $wisatas->where('nama', 'LIKE', "%{$search}%");
         }
 
@@ -32,6 +33,8 @@ class WisataController extends Controller
     public function show($id)
     {
         $wisata = Wisata::findOrFail($id);
-        return view('wisata.show', compact('wisata'));
+        $testimonis = Testimoni::where('wisata_id', $id)->get();
+        $averageRating = $testimonis->avg('rating');
+        return view('wisata.detail', compact('wisata', 'testimonis', 'averageRating'));
     }
 }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\WisataController as AdminWisataController;
 use App\Http\Controllers\Admin\KulinerController as AdminKulinerController;
+use App\Http\Controllers\TestimoniController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -26,3 +27,5 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('wisata', AdminWisataController::class, ['as' => 'admin']);
     Route::resource('kuliner', AdminKulinerController::class, ['as' => 'admin']);
 });
+
+Route::post('/testimoni', [TestimoniController::class, 'store'])->name('testimoni.store');

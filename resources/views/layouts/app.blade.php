@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -115,9 +117,15 @@
 
     <footer class="footer text-center py-4 mt-5">
         <div class="container">
-            <p class="text-muted mb-0">© 2024 Desa Pelita. All rights reserved.</p>
+            <p class="text-white mb-0">© 2024 Desa Pelita. All rights reserved.</p>
         </div>
     </footer>
+
+    <style>
+        .footer{
+            background-color: #007bff
+        }
+    </style>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>

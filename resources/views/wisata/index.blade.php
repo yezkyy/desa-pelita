@@ -37,7 +37,7 @@
 
     <!-- Daftar Wisata -->
     <div class="row mb-4">
-        @foreach ($wisatas as $wisata)
+        @forelse ($wisatas as $wisata)
         <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="{{ $loop->index * 100 }}">
             <div class="card h-100 shadow-sm">
                 <img src="{{ asset('storage/' . $wisata->gambar) }}" class="card-img-top" alt="{{ $wisata->nama }}" style="max-width: 100%; height: 200px; object-fit: cover;">
@@ -48,7 +48,13 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @empty
+        <div class="col-12">
+            <div class="alert alert-warning text-center" role="alert">
+                Pencarian tidak ditemukan.
+            </div>
+        </div>
+        @endforelse
     </div>
 
     <!-- Pagination -->
