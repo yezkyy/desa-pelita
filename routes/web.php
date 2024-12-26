@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\KulinerController as AdminKulinerController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/wisata', [WisataController::class, 'index'])->name('wisata.index');
+Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
 Route::get('/kuliner', [KulinerController::class, 'index'])->name('kuliner.index');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
