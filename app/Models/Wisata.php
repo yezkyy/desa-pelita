@@ -17,5 +17,8 @@ class Wisata extends Model
         'harga_tiket',
         'fasilitas',
         'lokasi',
+        'instagram',
+        'whatsapp',
+        'tiktok',
     ];
 }

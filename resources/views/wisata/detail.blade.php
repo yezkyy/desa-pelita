@@ -15,6 +15,12 @@
     <div class="row">
         <div class="col-md-8">
             <img src="{{ asset('storage/' . $wisata->gambar) }}" class="img-fluid rounded shadow-sm" alt="{{ $wisata->nama }}">
+            <div class="mt-3">
+                <h5 class="text-primary">Kontak Kami</h5>
+                <a href="{{ $wisata->instagram }}" class="btn btn-outline-primary me-2" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="{{ $wisata->whatsapp }}" class="btn btn-outline-success me-2" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="{{ $wisata->tiktok }}" class="btn btn-outline-dark" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+            </div>
         </div>
         <div class="col-md-4">
             <h5 class="text-primary">Deskripsi</h5>

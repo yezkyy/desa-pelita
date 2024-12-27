@@ -29,9 +29,12 @@ class WisataController extends Controller
             'harga_tiket' => 'nullable|string|max:255',
             'fasilitas' => 'nullable|string',
             'lokasi' => 'nullable|string',
+            'instagram' => 'nullable|url',
+            'whatsapp' => 'nullable|url',
+            'tiktok' => 'nullable|url',
         ]);
 
-        $data = $request->only(['nama', 'deskripsi', 'jam_operasional', 'harga_tiket', 'fasilitas', 'lokasi']);
+        $data = $request->only(['nama', 'deskripsi', 'jam_operasional', 'harga_tiket', 'fasilitas', 'lokasi', 'instagram', 'whatsapp', 'tiktok']);
 
         if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('wisata', 'public');
@@ -58,10 +61,13 @@ class WisataController extends Controller
             'harga_tiket' => 'nullable|string|max:255',
             'fasilitas' => 'nullable|string',
             'lokasi' => 'nullable|string',
+            'instagram' => 'nullable|url',
+            'whatsapp' => 'nullable|url',
+            'tiktok' => 'nullable|url',
         ]);
 
         $wisata = Wisata::findOrFail($id);
-        $data = $request->only(['nama', 'deskripsi', 'jam_operasional', 'harga_tiket', 'fasilitas', 'lokasi']);
+        $data = $request->only(['nama', 'deskripsi', 'jam_operasional', 'harga_tiket', 'fasilitas', 'lokasi', 'instagram', 'whatsapp', 'tiktok']);
 
         if ($request->hasFile('gambar')) {
             $data['gambar'] = $request->file('gambar')->store('wisata', 'public');
@@ -78,4 +84,4 @@ class WisataController extends Controller
         $wisata->delete();
         return redirect()->route('admin.wisata.index')->with('success', 'Wisata deleted successfully.');
     }
-}           
+}

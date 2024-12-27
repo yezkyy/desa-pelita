@@ -47,6 +47,18 @@
                             <textarea class="form-control" id="lokasi" name="lokasi" rows="3"></textarea>
                             <small class="form-text text-muted">Masukkan embed code dari Google Maps.</small>
                         </div>
+                        <div class="mb-3">
+                            <label for="instagram" class="form-label">Instagram</label>
+                            <input type="url" class="form-control" id="instagram" name="instagram" placeholder="https://instagram.com/username">
+                        </div>
+                        <div class="mb-3">
+                            <label for="whatsapp" class="form-label">WhatsApp</label>
+                            <input type="url" class="form-control" id="whatsapp" name="whatsapp" placeholder="https://wa.me/phone_number">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tiktok" class="form-label">TikTok</label>
+                            <input type="url" class="form-control" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@username">
+                        </div>
                         <button type="submit" class="btn btn-success w-100">Add Wisata</button>
                     </form>
                     <a href="{{ route('admin.wisata.index') }}" class="btn btn-secondary w-100 mt-3">Back</a>
