@@ -7,17 +7,30 @@ use App\Models\Testimoni;
 
 class KulinerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $kuliners = Kuliner::all();
+        $query = Kuliner::query();
+
+        if ($request->has('search')) {
+            $query->where('nama', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->has('filter')) {
+            if ($request->filter == 'popular') {
+                $query->orderBy('rating', 'desc');
+            } elseif ($request->filter == 'recent') {
+                $query->orderBy('created_at', 'desc');
+            }
+        }
+
+        $kuliners = $query->paginate(9);
+
         return view('kuliner.index', compact('kuliners'));
     }
 
     public function show($id)
     {
         $kuliner = Kuliner::findOrFail($id);
-        $testimonis = Testimoni::where('kuliner_id', $id)->get();
-        $averageRating = $testimonis->avg('rating');
-        return view('kuliner.detail', compact('kuliner', 'testimonis', 'averageRating'));
+        return view('kuliner.show', compact('kuliner'));
     }
 }
