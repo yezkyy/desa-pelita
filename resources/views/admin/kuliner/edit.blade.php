@@ -34,6 +34,35 @@
                                 <img src="{{ asset('storage/' . $kuliner->gambar) }}" alt="{{ $kuliner->nama }}" style="width: 100px;" class="mt-2">
                             @endif
                         </div>
+                        <div class="mb-3">
+                            <label for="jam_operasional" class="form-label">Jam Operasional</label>
+                            <input type="text" class="form-control" id="jam_operasional" name="jam_operasional" value="{{ $kuliner->jam_operasional }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="harga" class="form-label">Harga</label>
+                            <input type="text" class="form-control" id="harga" name="harga" value="{{ $kuliner->harga }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fasilitas" class="form-label">Fasilitas</label>
+                            <textarea class="form-control" id="fasilitas" name="fasilitas" rows="3">{{ $kuliner->fasilitas }}</textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lokasi" class="form-label">Lokasi (Embed Google Maps)</label>
+                            <textarea class="form-control" id="lokasi" name="lokasi" rows="3">{{ $kuliner->lokasi }}</textarea>
+                            <small class="form-text text-muted">Masukkan embed code dari Google Maps.</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="instagram" class="form-label">Instagram</label>
+                            <input type="text" class="form-control" id="instagram" name="instagram" value="{{ $kuliner->instagram }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="whatsapp" class="form-label">WhatsApp</label>
+                            <input type="text" class="form-control" id="whatsapp" name="whatsapp" value="{{ $kuliner->whatsapp }}">
+                        </div>
+                        <div class="mb-3">
+                            <label for="tiktok" class="form-label">TikTok</label>
+                            <input type="text" class="form-control" id="tiktok" name="tiktok" value="{{ $kuliner->tiktok }}">
+                        </div>
                         <button type="submit" class="btn btn-warning w-100">Update Kuliner</button>
                     </form>
                     <a href="{{ route('admin.kuliner.index') }}" class="btn btn-secondary w-100 mt-3">Back</a>

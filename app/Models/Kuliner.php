@@ -13,5 +13,17 @@ class Kuliner extends Model
         'nama',
         'deskripsi',
         'gambar',
+        'jam_operasional',
+        'harga',
+        'fasilitas',
+        'lokasi',
+        'instagram',
+        'whatsapp',
+        'tiktok',
     ];
+
+    public function testimonis()
+    {
+        return $this->hasMany(Testimoni::class);
+    }
 }

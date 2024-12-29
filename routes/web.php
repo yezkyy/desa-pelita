@@ -15,6 +15,7 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/wisata', [WisataController::class, 'index'])->name('wisata.index');
 Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
 Route::get('/kuliner', [KulinerController::class, 'index'])->name('kuliner.index');
+Route::get('/kuliner/{id}', [KulinerController::class, 'show'])->name('kuliner.show');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -29,3 +30,4 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 Route::post('/testimoni', [TestimoniController::class, 'store'])->name('testimoni.store');
+Route::post('/testimoni/store', [TestimoniController::class, 'store'])->name('testimoni.store');

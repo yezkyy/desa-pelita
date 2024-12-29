@@ -12,7 +12,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $kuliner->nama }}</h5>
                 <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($kuliner->deskripsi, 100) }}</p>
-                <a href="#" class="btn btn-success btn-sm">Coba Sekarang</a>
+                <a href="{{ route('kuliner.show', $kuliner->id) }}" class="btn btn-success btn-sm">Coba Sekarang</a>
             </div>
         </div>
     </div>

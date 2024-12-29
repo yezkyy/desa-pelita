@@ -11,11 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kuliners', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama');
-            $table->text('deskripsi');
-            $table->string('gambar');
+        Schema::table('kuliners', function (Blueprint $table) {
             $table->string('jam_operasional')->nullable();
             $table->string('harga')->nullable();
             $table->text('fasilitas')->nullable();
@@ -23,7 +19,6 @@ return new class extends Migration
             $table->string('instagram')->nullable();
             $table->string('whatsapp')->nullable();
             $table->string('tiktok')->nullable();
-            $table->timestamps();
         });
     }
 
@@ -32,6 +27,14 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kuliners');
+        Schema::table('kuliners', function (Blueprint $table) {
+            $table->dropColumn('jam_operasional');
+            $table->dropColumn('harga');
+            $table->dropColumn('fasilitas');
+            $table->dropColumn('lokasi');
+            $table->dropColumn('instagram');
+            $table->dropColumn('whatsapp');
+            $table->dropColumn('tiktok');
+        });
     }
 };

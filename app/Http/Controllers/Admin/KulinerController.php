@@ -31,23 +31,27 @@ class KulinerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'deskripsi' => 'required',
-            'gambar' => 'nullable|image',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'jam_operasional' => 'nullable|string|max:255',
+            'harga' => 'nullable|string|max:255',
+            'fasilitas' => 'nullable|string',
+            'lokasi' => 'nullable|string',
+            'instagram' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
         ]);
 
-        $kuliner = new Kuliner();
-        $kuliner->nama = $request->nama;
-        $kuliner->deskripsi = $request->deskripsi;
+        $data = $request->only(['nama', 'deskripsi', 'jam_operasional', 'harga', 'fasilitas', 'lokasi', 'instagram', 'whatsapp', 'tiktok']);
 
         if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('images', 'public');
-            $kuliner->gambar = $path;
+            $data['gambar'] = $request->file('gambar')->store('kuliner', 'public');
         }
 
-        $kuliner->save();
+        Kuliner::create($data);
 
-        return redirect()->route('admin.kuliner.index')->with('success', 'Kuliner created successfully.');
+        return redirect()->route('admin.kuliner.index')->with('success', 'Kuliner berhasil ditambahkan.');
     }
 
     /**
@@ -61,33 +65,40 @@ class KulinerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kuliner $kuliner)
+    public function edit($id)
     {
+        $kuliner = Kuliner::findOrFail($id);
         return view('admin.kuliner.edit', compact('kuliner'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kuliner $kuliner)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'deskripsi' => 'required',
-            'gambar' => 'nullable|image',
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'required|string',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'jam_operasional' => 'nullable|string|max:255',
+            'harga' => 'nullable|string|max:255',
+            'fasilitas' => 'nullable|string',
+            'lokasi' => 'nullable|string',
+            'instagram' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|string|max:255',
+            'tiktok' => 'nullable|string|max:255',
         ]);
 
-        $kuliner->nama = $request->nama;
-        $kuliner->deskripsi = $request->deskripsi;
+        $kuliner = Kuliner::findOrFail($id);
+        $data = $request->only(['nama', 'deskripsi', 'jam_operasional', 'harga', 'fasilitas', 'lokasi', 'instagram', 'whatsapp', 'tiktok']);
 
         if ($request->hasFile('gambar')) {
-            $path = $request->file('gambar')->store('images', 'public');
-            $kuliner->gambar = $path;
+            $data['gambar'] = $request->file('gambar')->store('kuliner', 'public');
         }
 
-        $kuliner->save();
+        $kuliner->update($data);
 
-        return redirect()->route('admin.kuliner.index')->with('success', 'Kuliner updated successfully.');
+        return redirect()->route('admin.kuliner.index')->with('success', 'Kuliner berhasil diperbarui.');
     }
 
     /**
