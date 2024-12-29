@@ -20,7 +20,7 @@ class TestimoniController extends Controller
         $data = $request->only(['kuliner_id', 'wisata_id', 'nama', 'rating', 'pesan']);
 
         // Hapus wisata_id jika null
-        if (is_null($data['wisata_id'])) {
+        if (empty($data['wisata_id'])) {
             unset($data['wisata_id']);
         }
 

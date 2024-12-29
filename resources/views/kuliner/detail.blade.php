@@ -53,6 +53,29 @@
         </div>
     </div>
 
+    <!-- Daftar Testimoni -->
+    <div class="mt-5">
+        <h3 class="text-center mb-4">Testimoni Pengunjung</h3>
+        @foreach ($testimonis as $testimoni)
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ $testimoni->nama }}</h5>
+                <p class="card-text">
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($i < $testimoni->rating)
+                            <span class="fa fa-star checked"></span>
+                        @else
+                            <span class="fa fa-star"></span>
+                        @endif
+                    @endfor
+                    ({{ $testimoni->rating }} dari 5)
+                </p>
+                <p class="card-text">{{ $testimoni->pesan }}</p>
+            </div>
+        </div>
+        @endforeach
+    </div>
+
     <!-- Form Testimoni -->
     <div class="mt-5">
         <h3 class="text-center mb-4">Berikan Testimoni Anda</h3>
@@ -79,29 +102,6 @@
             </div>
             <button type="submit" class="btn btn-primary">Kirim Testimoni</button>
         </form>
-    </div>
-
-    <!-- Daftar Testimoni -->
-    <div class="mt-5">
-        <h3 class="text-center mb-4">Testimoni Pengunjung</h3>
-        @foreach ($testimonis as $testimoni)
-        <div class="card mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{ $testimoni->nama }}</h5>
-                <p class="card-text">
-                    @for ($i = 0; $i < 5; $i++)
-                        @if ($i < $testimoni->rating)
-                            <span class="fa fa-star checked"></span>
-                        @else
-                            <span class="fa fa-star"></span>
-                        @endif
-                    @endfor
-                    ({{ $testimoni->rating }} dari 5)
-                </p>
-                <p class="card-text">{{ $testimoni->pesan }}</p>
-            </div>
-        </div>
-        @endforeach
     </div>
 
     <div class="mt-4">
