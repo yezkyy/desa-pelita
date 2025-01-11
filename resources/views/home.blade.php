@@ -84,6 +84,25 @@
     </div>
 </section>
 
+<!-- Berita Terbaru Section -->
+<div class="my-5">
+    <h2 class="text-center mb-4">Berita Terbaru</h2>
+    <div class="row">
+        @foreach ($beritas as $berita)
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <img src="{{ asset('storage/' . $berita->gambar) }}" class="card-img-top" alt="{{ $berita->judul }}" style="max-width: 100%; height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $berita->judul }}</h5>
+                    <p class="card-text text-muted">{{ \Illuminate\Support\Str::limit($berita->konten, 100) }}</p>
+                    <a href="{{ route('berita.show', $berita->id) }}" class="btn btn-primary btn-sm">Selengkapnya</a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
+
 <!-- Section Testimonials -->
 <section id="testimonials" class="py-5 bg-light" data-aos="fade-down">
     <div class="container">

@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Admin\WisataController as AdminWisataController;
 use App\Http\Controllers\Admin\KulinerController as AdminKulinerController;
 use App\Http\Controllers\TestimoniController;
+use App\Http\Controllers\BeritaController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
@@ -16,6 +17,8 @@ Route::get('/wisata', [WisataController::class, 'index'])->name('wisata.index');
 Route::get('/wisata/{id}', [WisataController::class, 'show'])->name('wisata.show');
 Route::get('/kuliner', [KulinerController::class, 'index'])->name('kuliner.index');
 Route::get('/kuliner/{id}', [KulinerController::class, 'show'])->name('kuliner.show');
+Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
+Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('berita.show');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
