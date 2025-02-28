@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('wisatas', function (Blueprint $table) {
-            $table->string('jam_operasional')->nullable()->change();
-            $table->string('harga_tiket')->nullable()->change();
-            $table->text('fasilitas')->nullable()->change();
+            $table->string('jam_operasional')->nullable();
+            $table->string('harga_tiket')->nullable();
+            $table->text('fasilitas')->nullable();
         });
     }
 
@@ -24,9 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('wisatas', function (Blueprint $table) {
-            $table->string('jam_operasional')->nullable(false)->change();
-            $table->string('harga_tiket')->nullable(false)->change();
-            $table->text('fasilitas')->nullable(false)->change();
+            $table->dropColumn(['jam_operasional', 'harga_tiket', 'fasilitas']);
         });
     }
 };
